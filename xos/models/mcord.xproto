@@ -1,0 +1,15 @@
+option app_label = "mcord";
+option name = "mcord";
+
+message MCordSubscriberService (Service) {
+     option verbose_name = "MCORD Service";
+     option description = "The Mobile Subscriber service in CORD";
+}
+
+message MCordSubscriberInstance (ServiceInstance) {
+     option verbose_name = "MCORD Subscriber";
+     option description = "This model holds the informations of a Mobile Subscriber in CORD";
+
+     required string imsi_number = 1 [max_length = 30, content_type = "stripped", blank = False, null = False, db_index = False];
+     required string apn_number = 1 [max_length = 30, content_type = "stripped", blank = False, null = False, db_index = False];
+}
