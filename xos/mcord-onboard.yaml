@@ -30,5 +30,3 @@ topology_template:
           # The following will concatenate with base_url automatically, if
           # base_url is non-null.
           xproto: models/
-          tosca_custom_types: mcord_service.yaml
-          tosca_resource: tosca/mcord_service.py
