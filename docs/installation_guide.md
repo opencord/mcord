@@ -34,7 +34,7 @@ As cord_profile, use `mcord-ng40`.
 
 The EPC is the only component that needs to be manually configured, after the fabric gets properly setup. An EPC instance can be created in two ways.
 Create an EPC instance using the XOS-UI
-Open in your browser the XOS UI : http://<your head node>/xos
+Open in your browser the XOS UI : `http://<your head node>/xos`
 * Log in
 * From the left panel, select `vEPC`
 * Click on `Virtual Evolved Packet Core ServiceInstances`
@@ -46,7 +46,7 @@ Open in your browser the XOS UI : http://<your head node>/xos
 
 ## Create an EPC instance using the XOS northbound API
 
-`curl -u xosadmin@opencord.org:<password> -X POST http://<ip address of pod>:8080//xosapi/v1/vepc/vepcserviceinstances -H "Content-Type: application/json" -d '{"blueprint":"build", "site_id": 1}'`
+`curl -u xosadmin@opencord.org:<password> -X POST http://<ip address of pod>:8080/xosapi/v1/vepc/vepcserviceinstances -H "Content-Type: application/json" -d '{"blueprint":"build", "site_id": 1}'`
 
 ## Verify a Successful Installation
 
