@@ -46,7 +46,7 @@ Open in your browser the XOS UI : `http://<your head node>/xos`
 
 ## Create an EPC instance using the XOS northbound API
 
-`curl -u xosadmin@opencord.org:<password> -X POST http://<ip address of pod>:8080/xosapi/v1/vepc/vepcserviceinstances -H "Content-Type: application/json" -d '{"blueprint":"build", "site_id": 1}'`
+`curl -u xosadmin@opencord.org:<password> -X POST http://<ip address of pod>/xosapi/v1/vepc/vepcserviceinstances -H "Content-Type: application/json" -d '{"blueprint":"build", "site_id": 1}'`
 
 ## Verify a Successful Installation
 
