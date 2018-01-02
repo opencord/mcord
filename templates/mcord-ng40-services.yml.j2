@@ -27,6 +27,7 @@ imports:
    - custom_types/image.yaml
    - custom_types/flavor.yaml
    - custom_types/network.yaml
+   - custom_types/networktemplate.yaml
    - custom_types/onosservice.yaml
    - custom_types/networkslice.yaml
    - custom_types/venbservice.yaml
@@ -47,6 +48,8 @@ topology_template:
       properties:
         must-exist: true
         name: {{ site_name }}
+
+# flavors
 
     m1.small:
       type: tosca.nodes.Flavor
@@ -69,6 +72,7 @@ topology_template:
         name: m1.xlarge
         must-exist: true
 
+# images
     image-venb:
       type: tosca.nodes.Image
       properties:
@@ -83,6 +87,23 @@ topology_template:
       type: tosca.nodes.Image
       properties:
         name: image-spgwu
+
+# network templates
+    private_template:
+      type: tosca.nodes.NetworkTemplate
+      properties:
+          name: private_template
+          visibility: private
+          translation: none
+          vtn_kind: PRIVATE
+
+    flat_template:
+      type: tosca.nodes.NetworkTemplate
+      properties:
+          name: flat_template
+          visibility: private
+          translation: none
+          vtn_kind: FLAT
 
 # management networks, fully created in management-net.yaml
     management:
@@ -99,48 +120,7 @@ topology_template:
         name: management_hosts
 {% endif %}
 
-# s1u_network is for connectivity between VMs, fully created in s1u-net.yaml
-    s1u_network:
-      type: tosca.nodes.Network
-      properties:
-        must-exist: true
-        name: s1u_network
-# s11_network is for connectivity between VMs, fully created in s11-net.yaml
-    s11_network:
-      type: tosca.nodes.Network
-      properties:
-        must-exist: true
-        name: s11_network
-# nbi_network is for connectivity between VMs, fully created in nbi-net.yaml
-    nbi_network:
-      type: tosca.nodes.Network
-      properties:
-        must-exist: true
-        name: nbi_network
-# sbi_network is for connectivity between VMs, fully created in sbi-net.yaml
-    sbi_network:
-      type: tosca.nodes.Network
-      properties:
-        must-exist: true
-        name: sbi_network
-# sgi_network is for connectivity between VMs, fully created in sgi-net.yaml
-    sgi_network:
-      type: tosca.nodes.Network
-      properties:
-        must-exist: true
-        name: sgi_network
-# spgw_network is for connectivity between VMs, fully created in spgw-net.yaml
-    spgw_network:
-      type: tosca.nodes.Network
-      properties:
-        must-exist: true
-        name: spgw_network
-# flat_network is for connectivity between VM inside cord and server outside, fully created in flat-net.yaml
-    flat_network:
-      type: tosca.nodes.Network
-      properties:
-        must-exist: true
-        name: flat_network
+# Other networks are created by vEPC service
 
 # ONOS_CORD, fully created in vtn.yaml
     service#ONOS_CORD:

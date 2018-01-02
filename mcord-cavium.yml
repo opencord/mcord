@@ -36,14 +36,6 @@ xos_new_tosca_config_templates:
   - vtn-service.yaml
   - fabric-service.yaml
   - management-net.yaml
-  - shared-net.yaml
-  - wan-net.yaml
-  - vsg-net.yaml
-  - s11-net.yaml
-  - flat-net-s1u.yaml
-  - flat-net-s1mme.yaml
-  - spgw-net.yaml
-  - sgi-net.yaml
   - mcord-cavium-services.yml
   - xos-gui-extensions.yml
   - service-graph-constraints.yaml
@@ -80,6 +72,12 @@ xos_services:
   - name: vspgwu
     path: orchestration/xos_services/vspgwu
     keypair: mcord_rsa
+  - name: vhss
+    path: orchestration/xos_services/vhss
+    keypair: mcord_rsa
+  - name: sdncontroller
+    path: orchestration/xos_services/sdn-controller
+    keypair: mcord_rsa
   - name: vepc
     path: orchestration/xos_services/epc-service
     keypair: mcord_rsa
@@ -105,7 +103,7 @@ charm_versions:
   nagios: "cs:trusty/nagios-10"
   neutron-api: "cs:~cordteam/trusty/neutron-api-6"
   nova-cloud-controller: "cs:trusty/nova-cloud-controller-64"
-  nova-compute: "cs:~cordteam/trusty/nova-compute-3"
+  nova-compute: "cs:~cordteam/trusty/nova-compute-4"
   nrpe: "cs:trusty/nrpe-4"
   ntp: "cs:trusty/ntp-14"
   openstack-dashboard: "cs:trusty/openstack-dashboard-19"

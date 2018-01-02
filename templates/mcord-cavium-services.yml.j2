@@ -27,6 +27,7 @@ imports:
    - custom_types/image.yaml
    - custom_types/flavor.yaml
    - custom_types/network.yaml
+   - custom_types/networktemplate.yaml
    - custom_types/onosservice.yaml
    - custom_types/networkslice.yaml
    - custom_types/vspgwcservice.yaml
@@ -35,6 +36,10 @@ imports:
    - custom_types/vspgwuvendor.yaml
    - custom_types/vmmeservice.yaml
    - custom_types/vmmevendor.yaml
+   - custom_types/vhssservice.yaml
+   - custom_types/vhssvendor.yaml
+   - custom_types/sdncontrollerservice.yaml
+   - custom_types/sdncontrollervendor.yaml
    - custom_types/vepcservice.yaml
    - custom_types/servicedependency.yaml
    - custom_types/mcordsubscriberservice.yaml
@@ -49,6 +54,7 @@ topology_template:
         must-exist: true
         name: {{ site_name }}
 
+# flavors
     m1.small:
       type: tosca.nodes.Flavor
       properties:
@@ -70,6 +76,7 @@ topology_template:
         name: m1.xlarge
         must-exist: true
 
+# images
     image-test:
       type: tosca.nodes.Image
       properties:
@@ -84,6 +91,23 @@ topology_template:
       type: tosca.nodes.Image
       properties:
         name: image-spgwu
+
+# network templates
+    private_template:
+      type: tosca.nodes.NetworkTemplate
+      properties:
+          name: private_template
+          visibility: private
+          translation: none
+          vtn_kind: PRIVATE
+
+    flat_template:
+      type: tosca.nodes.NetworkTemplate
+      properties:
+          name: flat_template
+          visibility: private
+          translation: none
+          vtn_kind: FLAT
 
 # management networks, fully created in management-net.yaml
     management:
@@ -100,36 +124,7 @@ topology_template:
         name: management_hosts
 {% endif %}
 
-# flat_network_s1mme is for connectivity between VMs, fully created in flat-net-s1mme.yaml
-    flat_network_s1mme:
-      type: tosca.nodes.Network
-      properties:
-        must-exist: true
-        name: flat_network_s1mme
-# flat_network_s1u is for connectivity between VMs, fully created in flat-net-s1u.yaml
-    flat_network_s1u:
-      type: tosca.nodes.Network
-      properties:
-        must-exist: true
-        name: flat_network_s1u
-# s11_network is for connectivity between VMs, fully created in s11-net.yaml
-    s11_network:
-      type: tosca.nodes.Network
-      properties:
-        must-exist: true
-        name: s11_network
-# sgi_network is for connectivity between VMs, fully created in sgi-net.yaml
-    sgi_network:
-      type: tosca.nodes.Network
-      properties:
-        must-exist: true
-        name: sgi_network
-# spgw_network is for connectivity between VMs, fully created in spgw-net.yaml
-    spgw_network:
-      type: tosca.nodes.Network
-      properties:
-        must-exist: true
-        name: spgw_network
+# Other networks are created by vEPC service
 
 # ONOS_CORD, fully created in vtn.yaml
     service#ONOS_CORD:
@@ -199,7 +194,7 @@ topology_template:
           pubkey: /opt/cord_profile/key_import/mcord_rsa.pub
 
     {{ site_name }}_vspgwc:
-      description: SDN controller slice
+      description: vSPGW-C slice
       type: tosca.nodes.Slice
       properties:
           name: {{ site_name }}_vspgwc
@@ -243,7 +238,7 @@ topology_template:
           pubkey: /opt/cord_profile/key_import/mcord_rsa.pub
 
     {{ site_name }}_vspgwu:
-      description: SDN controller slice
+      description: vSPGW-U slice
       type: tosca.nodes.Slice
       properties:
           name: {{ site_name }}_vspgwu
@@ -273,6 +268,93 @@ topology_template:
             relationship: tosca.relationships.BelongsToOne
         - flavor:
             node: m1.xlarge
+            relationship: tosca.relationships.BelongsToOne
+
+# vHSS service
+    service#vhss:
+      type: tosca.nodes.VHSSService
+      properties:
+          name: vhss
+          kind: vEPC
+          public_key: {{ lookup('file', config_cord_profile_dir + '/key_import/mcord_rsa.pub') }}
+          private_key_fn: /opt/xos/services/vhss/keys/mcord_rsa
+      artifacts:
+          pubkey: /opt/cord_profile/key_import/mcord_rsa.pub
+
+    {{ site_name }}_vhss:
+      description: vHSS Service Slice
+      type: tosca.nodes.Slice
+      properties:
+          name: {{ site_name }}_vhss
+          default_isolation: vm
+          network: noauto
+      requirements:
+          - site:
+              node: mysite
+              relationship: tosca.relationships.BelongsToOne
+          - service:
+              node: service#vhss
+              relationship: tosca.relationships.BelongsToOne
+          - default_image:
+              node: image-test
+              relationship: tosca.relationships.BelongsToOne
+          - default_flavor:
+              node: m1.small
+              relationship: tosca.relationships.BelongsToOne
+
+    sprint_hss:
+      type: tosca.nodes.VHSSVendor
+      properties:
+        name: sprint_hss
+      requirements:
+        - image:
+            node: image-test
+            relationship: tosca.relationships.BelongsToOne
+        - flavor:
+            node: m1.small
+            relationship: tosca.relationships.BelongsToOne
+
+#SDN Controller Service
+    service#sdncontroller:
+      type: tosca.nodes.SDNControllerService
+      properties:
+          name: sdncontroller
+          public_key: {{ lookup('file', config_cord_profile_dir + '/key_import/mcord_rsa.pub') }}
+          private_key_fn: /opt/xos/services/vspgwu/keys/mcord_rsa
+      artifacts:
+          pubkey: /opt/cord_profile/key_import/mcord_rsa.pub
+
+    {{ site_name }}_sdncontroller:
+      description: SDN controller slice
+      type: tosca.nodes.Slice
+      properties:
+          name: {{ site_name }}_sdncontroller
+          default_isolation: vm
+          network: noauto
+      requirements:
+          - site:
+              node: mysite
+              relationship: tosca.relationships.BelongsToOne
+          - service:
+              node: service#sdncontroller
+              relationship: tosca.relationships.BelongsToOne
+          - default_image:
+              node: image-test
+              relationship: tosca.relationships.BelongsToOne
+          - default_flavor:
+              node: m1.small
+              relationship: tosca.relationships.BelongsToOne
+
+    intel_sdncontroller:
+      type: tosca.nodes.SDNControllerVendor
+      properties:
+        name: intel_sdncontroller
+      requirements:
+        - image:
+            node: image-test
+            relationship: tosca.relationships.BelongsToOne
+        - flavor:
+            node: m1.small
             relationship: tosca.relationships.BelongsToOne
 
 # vEPC Service
@@ -322,13 +404,25 @@ topology_template:
             node: service#vspgwu
             relationship: tosca.relationships.BelongsToOne
 
+    vmme_vhss:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: None
+      requirements:
+        - subscriber_service:
+            node: service#vmme
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#vhss
+            relationship: tosca.relationships.BelongsToOne
+
 # M-CORD Subscriber
     service#mcord:
       type: tosca.nodes.MCordSubscriberService
       properties:
         name: mcord
 
-    # ServiceDependency M-CORD to vENB
+    # ServiceDependency M-CORD to vMME
     mcord_vmme:
       type: tosca.nodes.ServiceDependency
       properties:
