@@ -49,7 +49,7 @@ gui_background: "cord-bg.jpg" # TODO find mcord image
 
 enabled_gui_extensions: []
 
-# paths defined in manifest/default.xml, eNB is temporally removed
+# paths defined in manifest/default.xml
 xos_services:
   - name: vtn
     path: orchestration/xos_services/vtn-service
@@ -74,6 +74,9 @@ xos_services:
     keypair: mcord_rsa
   - name: vhss
     path: orchestration/xos_services/vhss
+    keypair: mcord_rsa
+  - name: hssdb
+    path: orchestration/xos_services/hss_db
     keypair: mcord_rsa
   - name: sdncontroller
     path: orchestration/xos_services/sdn-controller

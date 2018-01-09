@@ -38,6 +38,8 @@ imports:
    - custom_types/vmmevendor.yaml
    - custom_types/vhssservice.yaml
    - custom_types/vhssvendor.yaml
+   - custom_types/hssdbservice.yaml
+   - custom_types/hssdbvendor.yaml
    - custom_types/sdncontrollerservice.yaml
    - custom_types/sdncontrollervendor.yaml
    - custom_types/vepcservice.yaml
@@ -314,6 +316,49 @@ topology_template:
             node: m1.small
             relationship: tosca.relationships.BelongsToOne
 
+# HSS_DB service
+    service#hssdb:
+      type: tosca.nodes.HSSDBService
+      properties:
+          name: hssdb
+          public_key: {{ lookup('file', config_cord_profile_dir + '/key_import/mcord_rsa.pub') }}
+          private_key_fn: /opt/xos/services/hssdb/keys/mcord_rsa
+      artifacts:
+          pubkey: /opt/cord_profile/key_import/mcord_rsa.pub
+
+    {{ site_name }}_hssdb:
+      description: HSS-DB Service Slice
+      type: tosca.nodes.Slice
+      properties:
+          name: {{ site_name }}_hssdb
+          default_isolation: vm
+          network: noauto
+      requirements:
+          - site:
+              node: mysite
+              relationship: tosca.relationships.BelongsToOne
+          - service:
+              node: service#hssdb
+              relationship: tosca.relationships.BelongsToOne
+          - default_image:
+              node: image-test
+              relationship: tosca.relationships.BelongsToOne
+          - default_flavor:
+              node: m1.small
+              relationship: tosca.relationships.BelongsToOne
+
+    sprint_hssdb:
+      type: tosca.nodes.HSSDBVendor
+      properties:
+        name: sprint_hssdb
+      requirements:
+        - image:
+            node: image-test
+            relationship: tosca.relationships.BelongsToOne
+        - flavor:
+            node: m1.small
+            relationship: tosca.relationships.BelongsToOne
+
 #SDN Controller Service
     service#sdncontroller:
       type: tosca.nodes.SDNControllerService
@@ -414,6 +459,18 @@ topology_template:
             relationship: tosca.relationships.BelongsToOne
         - provider_service:
             node: service#vhss
+            relationship: tosca.relationships.BelongsToOne
+
+    vhss_hssdb:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: None
+      requirements:
+        - subscriber_service:
+            node: service#vhss
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#hssdb
             relationship: tosca.relationships.BelongsToOne
 
 # M-CORD Subscriber
