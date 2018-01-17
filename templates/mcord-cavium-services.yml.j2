@@ -84,6 +84,21 @@ topology_template:
       properties:
         name: image-test
 
+    image-mme:
+      type: tosca.nodes.Image
+      properties:
+        name: image-mme
+
+    image-hss:
+      type: tosca.nodes.Image
+      properties:
+        name: image-hss
+
+    image-hss-db:
+      type: tosca.nodes.Image
+      properties:
+        name: image-hss-db
+
     image-spgwc:
       type: tosca.nodes.Image
       properties:
@@ -167,10 +182,10 @@ topology_template:
               node: service#vmme
               relationship: tosca.relationships.BelongsToOne
           - default_image:
-              node: image-test
+              node: image-mme
               relationship: tosca.relationships.BelongsToOne
           - default_flavor:
-              node: m1.medium
+              node: m1.large
               relationship: tosca.relationships.BelongsToOne
 
     sprint_mme:
@@ -179,10 +194,10 @@ topology_template:
         name: sprint_mme
       requirements:
         - image:
-            node: image-test
+            node: image-mme
             relationship: tosca.relationships.BelongsToOne
         - flavor:
-            node: m1.medium
+            node: m1.large
             relationship: tosca.relationships.BelongsToOne
 
 #vSPGWC Service
@@ -298,10 +313,10 @@ topology_template:
               node: service#vhss
               relationship: tosca.relationships.BelongsToOne
           - default_image:
-              node: image-test
+              node: image-hss
               relationship: tosca.relationships.BelongsToOne
           - default_flavor:
-              node: m1.small
+              node: m1.large
               relationship: tosca.relationships.BelongsToOne
 
     sprint_hss:
@@ -310,10 +325,10 @@ topology_template:
         name: sprint_hss
       requirements:
         - image:
-            node: image-test
+            node: image-hss
             relationship: tosca.relationships.BelongsToOne
         - flavor:
-            node: m1.small
+            node: m1.large
             relationship: tosca.relationships.BelongsToOne
 
 # HSS_DB service
@@ -341,10 +356,10 @@ topology_template:
               node: service#hssdb
               relationship: tosca.relationships.BelongsToOne
           - default_image:
-              node: image-test
+              node: image-hss-db
               relationship: tosca.relationships.BelongsToOne
           - default_flavor:
-              node: m1.small
+              node: m1.large
               relationship: tosca.relationships.BelongsToOne
 
     sprint_hssdb:
@@ -353,10 +368,10 @@ topology_template:
         name: sprint_hssdb
       requirements:
         - image:
-            node: image-test
+            node: image-hss-db
             relationship: tosca.relationships.BelongsToOne
         - flavor:
-            node: m1.small
+            node: m1.large
             relationship: tosca.relationships.BelongsToOne
 
 #SDN Controller Service

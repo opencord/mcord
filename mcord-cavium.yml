@@ -261,15 +261,28 @@ compute_relations:
   - name: ntp
     relations: [ "nova-compute", ]
 
+image_dir: /opt/cord_profile/images # Should change the build to symlink instead of copy images?
 xos_images:
   - name: "image-test"
     url: "https://github.com/opencord/platform-install/releases/download/vms/trusty-server-cloudimg-amd64-disk1.img.20170201"
     checksum: "sha256:ebf007ba3ec1043b7cd011fc6668e2a1d1d4c69c41071e8513ab355df7a057cb"
 
+  - name: "image-mme"
+    url: "http://www.vicci.org/cord/c3po-mme1-comp.qcow2.20180118"
+    checksum: "sha256:d6979505967bbba5b6af2d48f833ddddefaf8c0e4fd23abf1853cb4b70615af5"
+
+  - name: "image-hss"
+    url: "http://www.vicci.org/cord/c3po-hss1-comp.qcow2.20180118"
+    checksum: "sha256:9446fb91c9bf3486adc6453ca4cd1dd1e93c03a30d3864fd1511029694bf4b1c"
+
+  - name: "image-hss-db"
+    url: "http://www.vicci.org/cord/c3po-dbn1-comp.qcow2.20180118"
+    checksum: "sha256:88d5370451541d5eec55f4d0c281abe4f679a63bcc8eae9cb57e9c1c9e797daa"
+
   - name: "image-spgwc"
-    url: "http://www.vicci.org/cord/ngic-cp1-cmpress.qcow2.20171121"
-    checksum: "sha256:eca43de006d193625778597cc9b3f171752c31e0ce6dbed363954c87c33935a3"
+    url: "http://www.vicci.org/cord/ngic-cp1-comp.qcow2.20180118"
+    checksum: "sha256:2495706b3066f969013e3312a61be422c8e2e2aab8e6ee35c2bf1ddf04a0ccb7"
 
   - name: "image-spgwu"
-    url: "http://www.vicci.org/cord/ngic-dp1-cmpress.qcow2.20171121"
-    checksum: "sha256:2d431dc24b8de5d531ddf9a82c20f692d9ac8c9d4dd0295c535acc06c6635bc5"
+    url: "http://www.vicci.org/cord/ngic-dp1-comp.qcow2.20180118"
+    checksum: "sha256:76a538a7f4c92cd1ca71036c51ddfac21b66c59be9700d9e6e11e8e723369ef8"
