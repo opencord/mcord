@@ -40,6 +40,7 @@ imports:
    - custom_types/vhssvendor.yaml
    - custom_types/hssdbservice.yaml
    - custom_types/hssdbvendor.yaml
+   - custom_types/internetemulatorservice.yaml
    - custom_types/sdncontrollerservice.yaml
    - custom_types/sdncontrollervendor.yaml
    - custom_types/vepcservice.yaml
@@ -108,6 +109,11 @@ topology_template:
       type: tosca.nodes.Image
       properties:
         name: image-spgwu
+
+    image-internetemulator:
+      type: tosca.nodes.Image
+      properties:
+        name: image-internetemulator
 
 # network templates
     private_template:
@@ -373,6 +379,37 @@ topology_template:
         - flavor:
             node: m1.large
             relationship: tosca.relationships.BelongsToOne
+
+# InternetEmulator service
+    service#internetemulator:
+      type: tosca.nodes.InternetEmulatorService
+      properties:
+          name: internetemulator
+          public_key: {{ lookup('file', config_cord_profile_dir + '/key_import/mcord_rsa.pub') }}
+          private_key_fn: /opt/xos/services/internetemulator/keys/mcord_rsa
+      artifacts:
+          pubkey: /opt/cord_profile/key_import/mcord_rsa.pub
+
+    {{ site_name }}_internetemulator:
+      description: Internetemulator Service Slice
+      type: tosca.nodes.Slice
+      properties:
+          name: {{ site_name }}_internetemulator
+          default_isolation: vm
+          network: noauto
+      requirements:
+          - site:
+              node: mysite
+              relationship: tosca.relationships.BelongsToOne
+          - service:
+              node: service#internetemulator
+              relationship: tosca.relationships.BelongsToOne
+          - default_image:
+              node: image-internetemulator
+              relationship: tosca.relationships.BelongsToOne
+          - default_flavor:
+              node: m1.small
+              relationship: tosca.relationships.BelongsToOne
 
 #SDN Controller Service
     service#sdncontroller:

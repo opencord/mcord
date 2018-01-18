@@ -78,6 +78,9 @@ xos_services:
   - name: hssdb
     path: orchestration/xos_services/hss_db
     keypair: mcord_rsa
+  - name: internetemulator
+    path: orchestration/xos_services/internetemulator
+    keypair: mcord_rsa
   - name: sdncontroller
     path: orchestration/xos_services/sdn-controller
     keypair: mcord_rsa
@@ -286,3 +289,7 @@ xos_images:
   - name: "image-spgwu"
     url: "http://www.vicci.org/cord/ngic-dp1-comp.qcow2.20180118"
     checksum: "sha256:76a538a7f4c92cd1ca71036c51ddfac21b66c59be9700d9e6e11e8e723369ef8"
+
+  - name: "image-internetemulator"
+    url: "http://www.vicci.org/cord/vlc-compress.qcow2.20180119"
+    checksum: "sha256:5c3a5752f909d053fc65861ad8e31ceeffb6bd986e3ea421f40f89d8fb299029"
