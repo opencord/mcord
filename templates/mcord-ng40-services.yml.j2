@@ -120,8 +120,6 @@ topology_template:
         name: management_hosts
 {% endif %}
 
-# Other networks are created by vEPC service
-
 # ONOS_CORD, fully created in vtn.yaml
     service#ONOS_CORD:
       type: tosca.nodes.ONOSService
@@ -321,3 +319,22 @@ topology_template:
         - provider_service:
             node: service#mcord
             relationship: tosca.relationships.BelongsToOne
+
+# EPC networks
+
+{% for network in mcord_networks %}
+    {{ network['name'] }}:
+      type: tosca.nodes.Network
+      properties:
+          name: {{ network['name'] }}
+          subnet: {{ network['subnet'] }}
+          permit_all_slices: {{ network['permit_all_slices'] }}
+      requirements:
+          - template:
+              node: {{ network['template'] }}
+              relationship: tosca.relationships.BelongsToOne
+          - owner:
+              node: {{ site_name }}_{{ network['owner'] }}
+              relationship: tosca.relationships.BelongsToOne
+
+{% endfor %}

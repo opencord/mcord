@@ -91,6 +91,44 @@ xos_services:
 # service graph gui constraints
 xos_gui_service_graph_constraints: '["mcord", "venb", ["vspgwc", "vspgwu"]]'
 
+# For creating the EPC networks in mcord-cavium-services.yml (copied from EPC blueprint)
+mcord_networks:
+  - name: s11_network
+    subnet: 112.0.0.0/24
+    permit_all_slices: True
+    template: private_template
+    owner: vspgwc
+  - name: sgi_network
+    subnet: 115.0.0.0/24
+    permit_all_slices: True
+    owner: vspgwu
+    template: private_template
+  - name: spgw_network
+    subnet: 117.0.0.0/24
+    permit_all_slices: True
+    template: private_template
+    owner: vspgwu
+  - name: flat_network_s1mme
+    subnet: 118.0.0.0/24
+    permit_all_slices: True
+    template: flat_template
+    owner: vmme
+  - name: flat_network_s1u
+    subnet: 119.0.0.0/24
+    permit_all_slices: True
+    template: flat_template
+    owner: vspgwu
+  - name: s6a_network
+    subnet: 120.0.0.0/24
+    permit_all_slices: True
+    template: private_template
+    owner: vhss
+  - name: db_network
+    subnet: 121.0.0.0/24
+    permit_all_slices: True
+    template: private_template
+    owner: vhss
+
 profile_library: "mcord"
 
 # VTN network configuration

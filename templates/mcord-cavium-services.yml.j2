@@ -543,3 +543,44 @@ topology_template:
         - provider_service:
             node: service#mcord
             relationship: tosca.relationships.BelongsToOne
+
+# EPC networks
+
+{% for network in mcord_networks %}
+    {{ network['name'] }}:
+      type: tosca.nodes.Network
+      properties:
+          name: {{ network['name'] }}
+          subnet: {{ network['subnet'] }}
+          permit_all_slices: {{ network['permit_all_slices'] }}
+      requirements:
+          - template:
+              node: {{ network['template'] }}
+              relationship: tosca.relationships.BelongsToOne
+          - owner:
+              node: {{ site_name }}_{{ network['owner'] }}
+              relationship: tosca.relationships.BelongsToOne
+
+{% endfor %}
+
+# Network Slices for InternetEmulator, not created by EPC
+
+    internetemulator_slice_management_network:
+      type: tosca.nodes.NetworkSlice
+      requirements:
+        - network:
+            node: management
+            relationship: tosca.relationships.BelongsToOne
+        - slice:
+            node: {{ site_name }}_internetemulator
+            relationship: tosca.relationships.BelongsToOne
+
+    internetemulator_slice_sgi_network:
+      type: tosca.nodes.NetworkSlice
+      requirements:
+        - network:
+            node: sgi_network
+            relationship: tosca.relationships.BelongsToOne
+        - slice:
+            node: {{ site_name }}_internetemulator
+            relationship: tosca.relationships.BelongsToOne
