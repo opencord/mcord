@@ -20,7 +20,7 @@
 cord_scenario: cord
 cord_profile: mcord-cavium
 
-compute_vm_mem: 32768
+compute_vm_mem: 65536
 
 vagrant_up_prereqs:
   - prereqs-check
