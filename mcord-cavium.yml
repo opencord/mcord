@@ -309,12 +309,12 @@ xos_images:
     checksum: "sha256:ebf007ba3ec1043b7cd011fc6668e2a1d1d4c69c41071e8513ab355df7a057cb"
 
   - name: "image-mme"
-    url: "http://www.vicci.org/cord/c3po-mme1-comp.qcow2.20180118"
-    checksum: "sha256:d6979505967bbba5b6af2d48f833ddddefaf8c0e4fd23abf1853cb4b70615af5"
+    url: "http://www.vicci.org/cord/c3po-mme1-comp.qcow2.20180126"
+    checksum: "sha256:cca87562d44b7886c426da1e920ef9add9cb615504f60da17432ec825d81d3bb"
 
   - name: "image-hss"
-    url: "http://www.vicci.org/cord/c3po-hss1-comp.qcow2.20180118"
-    checksum: "sha256:9446fb91c9bf3486adc6453ca4cd1dd1e93c03a30d3864fd1511029694bf4b1c"
+    url: "http://www.vicci.org/cord/c3po-hss1-comp.qcow2.20180126"
+    checksum: "sha256:86ecb5846212547ecd1c3864b3f1a1b150d083026169acb1018e9b7e0ae95784"
 
   - name: "image-hss-db"
     url: "http://www.vicci.org/cord/c3po-dbn1-comp.qcow2.20180118"
