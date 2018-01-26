@@ -46,6 +46,7 @@ imports:
    - custom_types/vepcservice.yaml
    - custom_types/servicedependency.yaml
    - custom_types/mcordsubscriberservice.yaml
+   - custom_types/progranservice.yaml
 
 topology_template:
   node_templates:
@@ -459,6 +460,16 @@ topology_template:
       type: tosca.nodes.VEPCService
       properties:
           name: vepc
+          public_key: {{ lookup('file', config_cord_profile_dir + '/key_import/mcord_rsa.pub') }}
+          private_key_fn: /opt/xos/services/epc-service/keys/mcord_rsa
+      artifacts:
+          pubkey: /opt/cord_profile/key_import/mcord_rsa.pub
+
+# Progran Service
+    service#progran:
+      type: tosca.nodes.ProgranService
+      properties:
+          name: progran
           public_key: {{ lookup('file', config_cord_profile_dir + '/key_import/mcord_rsa.pub') }}
           private_key_fn: /opt/xos/services/epc-service/keys/mcord_rsa
       artifacts:

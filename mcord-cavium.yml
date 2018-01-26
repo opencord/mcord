@@ -87,9 +87,17 @@ xos_services:
   - name: vepc
     path: orchestration/xos_services/epc-service
     keypair: mcord_rsa
+  - name: progran
+    path: orchestration/xos_services/progran
 
 # service graph gui constraints
-xos_gui_service_graph_constraints: '["mcord", "venb", ["vspgwc", "vspgwu"]]'
+xos_gui_service_graph_constraints: '[
+  ["vepc", null, "mcord", null, null],
+  [null, null, "progran", null, null],
+  ["hssdb", "vhss", "vmme", null, null],
+  [null, "vspgwc", "sdncontroller","vspgwu", null],
+  [null, null, null, "internetemulator", null]
+]'
 
 # For creating the EPC networks in mcord-cavium-services.yml (copied from EPC blueprint)
 mcord_networks:
