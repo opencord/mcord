@@ -40,9 +40,6 @@ xos_new_tosca_config_templates:
   - xos-gui-extensions.yml
   - service-graph-constraints.yaml
 
-xos_other_templates:
-  - fabric-network-cfg.json
-
 # GUI Config [new GUI]
 gui_project_name: "M-CORD"
 gui_background: "cord-bg.jpg" # TODO find mcord image
