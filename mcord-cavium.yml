@@ -317,8 +317,8 @@ xos_images:
     checksum: "sha256:ebf007ba3ec1043b7cd011fc6668e2a1d1d4c69c41071e8513ab355df7a057cb"
 
   - name: "image-mme"
-    url: "http://www.vicci.org/cord/c3po-mme1-comp.qcow2.20180126"
-    checksum: "sha256:cca87562d44b7886c426da1e920ef9add9cb615504f60da17432ec825d81d3bb"
+    url: "http://www.vicci.org/cord/c3po-mme1-comp.qcow2.20180131"
+    checksum: "sha256:f7e3cb27a02e890f65472c79038be68a161c692ad7c48679d09f12ea97b5c024"
 
   - name: "image-hss"
     url: "http://www.vicci.org/cord/c3po-hss1-comp.qcow2.20180126"
