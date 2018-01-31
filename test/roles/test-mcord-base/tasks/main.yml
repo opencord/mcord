@@ -28,8 +28,8 @@
   tags:
     - skip_ansible_lint # running a sub job
 
-- name: Wait for VMs to appear in Nova
-  shell: source /opt/cord_profile/admin-openrc.sh; nova list --all-tenants|grep '{{ item }}' > /dev/null
+- name: Wait for VMs to come up
+  shell: source /opt/cord_profile/admin-openrc.sh; nova list --all-tenants|grep '{{ item }}.*\(ACTIVE\|ERROR\)' > /dev/null
   args:
     executable: /bin/bash
   register: result
