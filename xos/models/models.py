@@ -23,4 +23,13 @@ class MCordSubscriberInstance(MCordSubscriberInstance_decl):
         except IndexError:
             raise XOSValidationError("Service MCORD cannot be found, please make sure that the model exists.")
 
+        # prevent IMSI duplicate
+        try:
+            instance_with_same_imsi = MCordSubscriberInstance.objects.get(imsi_number=self.imsi_number)
+
+            if (not self.pk and instance_with_same_imsi) or (self.pk and self.pk != instance_with_same_imsi.pk):
+                raise XOSValidationError("An MCORDSubscriber with imsi_number '%s' already exists" % self.imsi_number)
+        except self.DoesNotExist:
+            pass
+
         super(MCordSubscriberInstance, self).save(*args, **kwargs)
