@@ -18,8 +18,21 @@ M-CORD includes service manifests:
 | vSPGWU                 | https://github.com/opencord/vspgwu |
 | VTN                 | https://github.com/opencord/vtn |
 
-## Model Extensions 
-M-CORD does not extend CORD's core models.
+## Model Extensions
 
-## GUI Extensions 
+M-CORD extends CORD's core models with the following model specification [mcord.xproto](https://github.com/opencord/mcord/blob/master/xos/models/mcord.xproto),
+which represents the subscriber that anchors a chain of ServiceInstances:
+
+```proto
+message MCordSubscriberInstance (ServiceInstance) {
+    option verbose_name = "MCORD Subscriber";
+    option description = "This model holds the informations of a Mobile Subscriber in CORD";
+
+    required string imsi_number = 1 [max_length = 30, content_type = "stripped", blank = False, null = False, db_index = False];
+    optional string apn_number = 2 [max_length = 30, content_type = "stripped", blank = True, null = True, db_index = False];
+    optional int32 ue_status = 3 [max_length = 30, choices = "(('0', 'Detached'), ('1', 'Attached'))", blank = True, null = True, db_index = False];
+}
+```
+
+## GUI Extensions
 M-CORD doesn’t include any GUI extension.
