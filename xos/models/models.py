@@ -32,4 +32,8 @@ class MCordSubscriberInstance(MCordSubscriberInstance_decl):
         except self.DoesNotExist:
             pass
 
+        if self.is_new and not self.created_by:
+            # NOTE if created_by is null it has been created by XOS
+            self.created_by = "XOS"
+
         super(MCordSubscriberInstance, self).save(*args, **kwargs)
