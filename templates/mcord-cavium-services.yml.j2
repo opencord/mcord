@@ -1,4 +1,4 @@
-
+---
 {#
 Copyright 2017-present Open Networking Foundation
 
@@ -15,10 +15,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 #}
 
-
 tosca_definitions_version: tosca_simple_yaml_1_0
 
-description: created by platform-install
+description: created by mcord profile
 
 imports:
    - custom_types/slice.yaml
@@ -139,12 +138,12 @@ topology_template:
         must-exist: true
         name: management
 
-{% if use_management_hosts %}
-    management_hosts:
+{% if use_vtn_net_management_host %}
+    management_host:
       type: tosca.nodes.Network
       properties:
+        name: management_host
         must-exist: true
-        name: management_hosts
 {% endif %}
 
 # Other networks are created by vEPC service
