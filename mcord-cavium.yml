@@ -133,6 +133,12 @@ mcord_networks:
     permit_all_slices: True
     template: private_template
     owner: vhss
+  - name: flat_network_s1mme_p4
+    subnet: 122.0.0.0/24
+    permit_all_slices: True
+    template: flat_template
+    owner: vmme
+
 
 profile_library: "mcord"
 
