@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,9 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
----
-# mcord-virtual Pod Config
+# mcord-ng40-virtual Pod Config
 # Creates a virtual multi-node M-CORD pod, aka "mcord-in-a-box"
 
 cord_scenario: cord
@@ -27,8 +26,24 @@ vagrant_up_prereqs:
   - ciab-ovs
 
 build_targets:
- - compute1-up
+  - compute1-up
 
+# Virtual-specific config of network interfaces, for virtual install in Vagrant
+#
+# platform-install config variables
+# which network interfaces belong to which bond on nodes
+management_net_interfaces:
+  - eth2
+
+fabric_net_interfaces:
+  - eth3
+
+# Bring up alias interfaces for the vsg and public networks, for forwarding
+# traffic in virtual pod
+use_addresspool_vsg: True
+use_addresspool_public: True
+
+# MaaS config variables
 external_iface: 'eth0'
 
 skipTags:
