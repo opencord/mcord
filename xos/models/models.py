@@ -16,13 +16,6 @@ class MCordSubscriberInstance(MCordSubscriberInstance_decl):
         proxy = True
 
     def save(self, *args, **kwargs):
-        # NOTE someone is setting owner_id, so just override it for now
-        try:
-            mcord_service = MCordSubscriberService.objects.all()[0]
-            self.owner_id = mcord_service.id
-        except IndexError:
-            raise XOSValidationError("Service MCORD cannot be found, please make sure that the model exists.")
-
         # if we don't have a name, use the IMSI number has a name
         if not self.name:
             self.name = self.imsi_number

@@ -10,6 +10,7 @@ message MCordSubscriberService (Service) {
 message MCordSubscriberInstance (ServiceInstance) {
     option verbose_name = "MCORD Subscriber";
     option description = "This model holds the informations of a Mobile Subscriber in CORD";
+    option owner_class_name="MCordSubscriberService";
 
     required string imsi_number = 1 [max_length = 30, content_type = "stripped", blank = False, null = False, db_index = False];
     optional string apn_number = 2 [max_length = 30, content_type = "stripped", blank = True, null = True, db_index = False];
