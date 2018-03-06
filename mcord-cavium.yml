@@ -48,6 +48,8 @@ enabled_gui_extensions: []
 
 # paths defined in manifest/default.xml
 xos_services:
+  - name: mcord
+    path: orchestration/profiles/mcord
   - name: vtn
     path: orchestration/xos_services/vtn-service
     keypair: vsg_rsa
@@ -133,8 +135,6 @@ mcord_networks:
     permit_all_slices: True
     template: private_template
     owner: vhss
-
-profile_library: "mcord"
 
 # Juju config
 charm_versions:

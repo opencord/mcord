@@ -14,19 +14,11 @@
 # limitations under the License.
 
 
-tosca_definitions_version: tosca_simple_yaml_1_0
+name: mcord
+accessor:
+  username: xosadmin@opencord.org
+  password: "@/opt/xos/services/mcord/credentials/xosadmin@opencord.org"
+dependency_graph: "/opt/xos/synchronizers/mcord/model-deps"
+sys_dir: "/opt/xos/synchronizers/mcord/sys"
+models_dir: "/opt/xos/synchronizers/mcord/models"
 
-description: Onboard rcord models
-
-imports:
-   - custom_types/xos.yaml
-
-topology_template:
-  node_templates:
-    library#mcord:
-      type: tosca.nodes.ServiceController
-      properties:
-          base_url: file:///opt/cord/orchestration/profiles/mcord/xos/
-          # The following will concatenate with base_url automatically, if
-          # base_url is non-null.
-          xproto: models/
