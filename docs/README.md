@@ -1,3 +1,6 @@
+# <mark> M-CORD 5.0 documentation is in progress, not ready yet ! </mark>
+#<mark> We are trying to finish it next week !</mark>
+
 # M-CORD Profile
 
 The M-CORD (Mobile CORD) profile is `Official` as of 4.1.
