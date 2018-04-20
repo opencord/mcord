@@ -32,7 +32,7 @@ Two environments are available, depending on your needs:
 To understand what a local development environment is, what it can help you
 with, and how to build it, [see here](/xos/dev/workflow_mock_single.md).
 
-When it’s time to specify the PODCONFIG file, use mcord-ng4t-mock.yml, instead
+When it’s time to specify the PODCONFIG file, use mcord-cavium-mock.yml, instead
 of the default value (rcord-mock.yml)
 
 ### CORD-in-a-Box (CiaB) Development
@@ -47,7 +47,7 @@ To build M-CORD CiaB, follow the [virtual install steps](/install_virtual.md).
 > rather than `OnePC-Ubuntu14.04.5`.  This will select a machine with enough
 > resources to run M-CORD.
 
-When it’s time to specify the PODCONFIG file, use `mcord-ng40-virtual.yml`,
+When it’s time to specify the PODCONFIG file, use `mcord-cavium-virtual.yml`,
 instead of the default value, `rcord-virtual.yml`.
 
 > Warning: At today, given the number of VNFs that M-CORD provides, it requires
