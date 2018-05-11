@@ -320,25 +320,25 @@ xos_images:
     checksum: "sha256:ebf007ba3ec1043b7cd011fc6668e2a1d1d4c69c41071e8513ab355df7a057cb"
 
   - name: "image-mme"
-    url: "http://www.vicci.org/cord/c3po-mme1-comp.qcow2.20180131"
-    checksum: "sha256:f7e3cb27a02e890f65472c79038be68a161c692ad7c48679d09f12ea97b5c024"
+    url: "http://www.vicci.org/cord/image-mme.qcow2.20180511"
+    checksum: "sha256:c063e902172a08c9d6bc9fc3438f164dd7c0ddc6610c25c4ae47d6940629709e"
 
   - name: "image-hss"
-    url: "http://www.vicci.org/cord/c3po-hss1-comp.qcow2.20180126"
-    checksum: "sha256:86ecb5846212547ecd1c3864b3f1a1b150d083026169acb1018e9b7e0ae95784"
+    url: "http://www.vicci.org/cord/image-hss.qcow2.20180511"
+    checksum: "sha256:8ab04032c0d84d91e31bee6a261d70c26038182f80da3ac48e3391851e4eb88b"
 
   - name: "image-hss-db"
-    url: "http://www.vicci.org/cord/c3po-dbn1-comp.qcow2.20180118"
-    checksum: "sha256:88d5370451541d5eec55f4d0c281abe4f679a63bcc8eae9cb57e9c1c9e797daa"
+    url: "http://www.vicci.org/cord/image-hss-db.qcow2.20180511"
+    checksum: "sha256:829e4bc311bf11eeec114f469ea46088c4c9b63ed252c9f456c45cc52e1bcdfa"
 
   - name: "image-spgwc"
-    url: "http://www.vicci.org/cord/ngic-cp1-comp.qcow2.20180118"
-    checksum: "sha256:2495706b3066f969013e3312a61be422c8e2e2aab8e6ee35c2bf1ddf04a0ccb7"
+    url: "http://www.vicci.org/cord/image-spgwc.qcow2.20180511"
+    checksum: "sha256:13ee8cc125c0d8e6bdc6048e681b8a0b4fb368118706c79e1a09f9b6be9fc9b1"
 
   - name: "image-spgwu"
-    url: "http://www.vicci.org/cord/ngic-dp1-comp.qcow2.20180118"
+    url: "http://www.vicci.org/cord/image-spgwu.qcow2.20180511"
     checksum: "sha256:76a538a7f4c92cd1ca71036c51ddfac21b66c59be9700d9e6e11e8e723369ef8"
 
   - name: "image-internetemulator"
-    url: "http://www.vicci.org/cord/vlc-compress.qcow2.20180119"
-    checksum: "sha256:5c3a5752f909d053fc65861ad8e31ceeffb6bd986e3ea421f40f89d8fb299029"
+    url: "http://www.vicci.org/cord/image-internetemulator.qcow2.20180511"
+    checksum: "sha256:336ced97a946d67ff317acfce54b4bfa510aafd2e517502ca87f6d196ceb3b80"
