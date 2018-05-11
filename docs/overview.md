@@ -1,6 +1,6 @@
 # Overview
 
-## What is M-CORD?
+## What is M-CORD
 
 M-CORD is a CORD use-case for mobile edge cloud. The architecture allows
 Service Providers to disaggregate both the RAN and the core, as well as to
@@ -168,31 +168,11 @@ NGIC CUPS architecture is aligned with the 3GPP 5G direction. It has been
 developed using data plane development kit (DPDK) version optimized for Intel
 Architecture.
 
+In this release 5.0, we also added MME, HSS, and HSS_DB as open source
+reference implementations.
+
 If you’re interested to know more and explore the EPC code, [see
 here](https://gerrit.opencord.org/#/admin/projects/ngic).
-
-## NG40 vTester software
-
-Within M-CORD, ng4T provides for free a limited version of its NG40 software.
-
-The free version:
-
-* Expires on the April 1st 2018
-* Emulates up to 1 eNB
-* Emulates up to 10 UE
-* Has 1 MME with an integrated HSS
-* Can connect up to 1 SPGW-C/U
-* Allows users to attach, detach and send user plane traffic
-* Support only standard Linux interfaces, no DPDK
-
-In order to use the NG40, the Operator will need to apply for a free NG40
-M-CORD license with ng4T at the beginning of the setup. Detailed steps can be
-found in the Installation section below in this guide.
-
-Full versions of the NG40 vTester can do much more than this. This requires
-users to apply for additional licenses. In order to apply for licenses, users
-will need to contact directly ng4T, using the email address `support@ng4t.com`.
-More details about the NG40 can be found at [their website](http://www.ng4t.com).
 
 ## XOS Service Graph
 
@@ -206,9 +186,9 @@ service.
 
 XOS comes with a UI for instantiating and onboarding services, and creating
 service graphs. In the current implementation of M-CORD, the service graph
-shown in earlier sections has the following representation in XOS:
+has the following representation in XOS:
 
-![M-CORD XOS services wiring diagram](static/images/services_diagram.png)
+![M-CORD XOS services wiring diagram](static/images/service_graph-5.0.png)
 
 Instances of services are connected to each other in the data plane via private
 networks. On the orchestration side, they are connected via XOS-defined
@@ -237,9 +217,8 @@ control plane, and has no data-plane functionality. Its job is to bring up and
 help configure instances of the service graph described in this document. The
 implementation of vEPC-as-a-Service contains a declarative description of the
 service graph in its config file,
-<https://github.com/opencord/epc-service/blob/cord-4.1/xos/synchronizer/vepc_config.yaml>.
-It is contained in an option called “blueprints.” While there is currently only
-one such blueprint graph, more may be added in the future.
+<https://github.com/opencord/epc-service/blob/cord-5.0/xos/synchronizer/vepc_config.yaml>.
+It is contained in an option called “blueprints”.
 
 In the blueprint graph, the network section configures the networks, and the
 graph section defines ServiceInstances and links them together via those
@@ -264,9 +243,9 @@ Once the objects in the XOS data model have been created, it is up to the XOS
 synchronizers to translate them and make the service operational. Synchronizers
 are controllers that run in their own containers and react to changes in the
 data model to communicate those changes to the VNF in question. In the M-CORD
-setup, there are synchronizers for each of the services: vENB, vSPGWU, vSPGWC
-as well as vEPC-as-a-service. In addition, there are also synchronizers for the
-back-end components: OpenStack and ONOS.
+setup, there are synchronizers for each of the services: vENB, vMME, vHSS,
+vHSS_DB, vSPGWU, vSPGWC, as well as vEPC-as-a-service. In addition, there are
+also synchronizers for the back-end components: OpenStack and ONOS.
 
 There are two parts of a synchronizer: `model policies` and `sync steps`. Model
 Policies operate on the data model. vEPC-as-a-service is a good example of a
