@@ -1,7 +1,5 @@
 # M-CORD Profile
 
-M-CORD 5.0 documentation is not ready yet, we are working on it now !
-
 The M-CORD (Mobile CORD) profile is `Official` as of 4.1. This document
 describes 5.0.
 
@@ -13,8 +11,8 @@ M-CORD includes service manifests: mcord-cavium
 |--------------|---------------|
 | epc-service  | https://github.com/opencord/epc-service |
 | Fabric       | https://github.com/opencord/fabric |
-| HSS_DB       | based on Cassandra, will be provided in hss_db image |
-| InternetEmulator | based on VLC, will be provided in internetEmulator image |
+| HSS_DB       | based on Cassandra, provided in hss_db image |
+| InternetEmulator | based on VLC, provided in internetEmulator image |
 | ONOS         | https://github.com/opencord/onos-service |
 | OpenStack    | https://github.com/opencord/openstack |
 | vENB         | https://github.com/opencord/venb |
