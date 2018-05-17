@@ -326,7 +326,7 @@ xos_images:
 
   - name: "image-spgwu"
     url: "http://www.vicci.org/cord/image-spgwu.qcow2.20180511"
-    checksum: "sha256:76a538a7f4c92cd1ca71036c51ddfac21b66c59be9700d9e6e11e8e723369ef8"
+    checksum: "sha256:b91b7273292f00944dde85c374a2c18d914fdd7371c6677458b8cd7c6943df08"
 
   - name: "image-internetemulator"
     url: "http://www.vicci.org/cord/image-internetemulator.qcow2.20180511"
