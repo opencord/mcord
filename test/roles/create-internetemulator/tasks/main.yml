@@ -19,11 +19,11 @@
 - name: TOSCA to create internetemulator
   template:
     src: "internetemulator.yaml.j2"
-    dest: "{{ head_cord_profile_dir }}/internetemulator.yaml"
+    dest: "/tmp/internetemulator.yaml"
 
 - name: Read internetemulator.yaml
   slurp:
-    src: "{{ head_cord_profile_dir }}/internetemulator.yaml"
+    src: "/tmp/internetemulator.yaml"
   register: slurpfile
 
 - name: Add InternetEmulatorServiceInstance via TOSCA
@@ -36,6 +36,6 @@
     body: "{{ slurpfile['content'] | b64decode }}"
     status_code: 200
   register: result
-  until: result | success
+  until: result is success
   retries: 50
   delay: 5

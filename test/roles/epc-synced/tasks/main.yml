@@ -18,10 +18,11 @@
 
 - name: Wait for synchronizers to run
   uri:
-    url: http://localhost/xosapi/v1/{{ item }}
+    url: "{{ xos_api_url }}/xosapi/v1/{{ item }}"
     user: "{{ xos_admin_user }}"
     password: "{{ xos_admin_pass }}"
     return_content: yes
+    force_basic_auth: yes
   register: result
   until: result.json["items"] and result.json["items"][0]["backend_status"] == "OK"
   retries: 20

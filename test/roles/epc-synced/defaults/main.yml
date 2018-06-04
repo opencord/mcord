@@ -16,9 +16,9 @@
 
 # roles/epc-synced/defaults/main.yml
 
-config_credentials_dir: "{{ playbook_dir }}/../../../../build/platform-install/credentials"
-
-xos_admin_user: "xosadmin@opencord.org"
-xos_admin_pass: "{{ lookup('file', config_credentials_dir ~ '/' ~ xos_admin_user) }}"
+xos_admin_user: "admin@opencord.org"
+xos_admin_pass: "letmein"
 
 epc_sync_objects: []
+
+xos_api_url: "http://xos-gui.default.svc.cluster.local:4000"
