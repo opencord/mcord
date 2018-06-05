@@ -19,7 +19,7 @@
 # Set up XOS for the MWC 2018 demos
 
 - name: Run base M-CORD tests
-  hosts: head
+  hosts: all
   become: no
   # These variables could be elevated to the profile. Think about
   # doing this after the E2E test framework is complete.

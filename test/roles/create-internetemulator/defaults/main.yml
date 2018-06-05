@@ -16,9 +16,6 @@
 
 # roles/create-internetemulator/defaults/main.yml
 
-config_credentials_dir: "{{ playbook_dir }}/../../../../build/platform-install/credentials"
-head_cord_profile_dir: "/opt/cord_profile"
-
-xos_admin_user: "xosadmin@opencord.org"
-xos_admin_pass: "{{ lookup('file', config_credentials_dir ~ '/' ~ xos_admin_user) }}"
-xos_tosca_url: "http://xos-tosca/xos-tosca"
+xos_admin_user: "admin@opencord.org"
+xos_admin_pass: "letmein"
+xos_tosca_url: "http://xos-tosca.default.svc.cluster.local:9102"

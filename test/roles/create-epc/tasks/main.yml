@@ -18,26 +18,29 @@
 
 - name: Check for EPC ServiceInstance
   uri:
-    url: http://localhost/xosapi/v1/vepc/vepcserviceinstances
+    url: "{{ xos_api_url }}/xosapi/v1/vepc/vepcserviceinstances"
     user: "{{ xos_admin_user }}"
     password: "{{ xos_admin_pass }}"
     return_content: yes
+    force_basic_auth: yes
   register: result
 
 - name: Get EPC Service ID
   uri:
-    url: http://localhost/xosapi/v1/vepc/vepcservices
+    url: "{{ xos_api_url }}/xosapi/v1/vepc/vepcservices"
     user: "{{ xos_admin_user }}"
     password: "{{ xos_admin_pass }}"
     return_content: yes
+    force_basic_auth: yes
   register: vepcservice
   when: not result.json["items"]
 
 - name: Create EPC
   uri:
-    url: http://localhost/xosapi/v1/vepc/vepcserviceinstances
+    url: "{{ xos_api_url }}/xosapi/v1/vepc/vepcserviceinstances"
     user: "{{ xos_admin_user }}"
     password: "{{ xos_admin_pass }}"
+    force_basic_auth: yes
     method: POST
     body:
       blueprint: "{{ epc_blueprint }}"
