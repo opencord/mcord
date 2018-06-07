@@ -27,6 +27,7 @@
   with_items: "{{ test_networks }}"
   tags:
     - skip_ansible_lint # running a sub job
+  changed_when: False
 
 - name: Wait for VMs to come up
   shell: export OS_CLOUD=openstack_helm; openstack server list --all-projects|grep '{{ item }}.*\(ACTIVE\|ERROR\)' > /dev/null
@@ -39,6 +40,7 @@
   with_items: "{{ test_services }}"
   tags:
     - skip_ansible_lint # running a sub job
+  changed_when: False
 
 - name: Delete any VMs that are in ERROR state (XOS will re-create them)
   shell: export OS_CLOUD=openstack_helm; for vm in $(openstack server list --all-projects|grep 'ERROR'|awk '{ print $2 }'); do openstack server delete $vm; done
@@ -58,6 +60,7 @@
   with_items: "{{ test_services }}"
   tags:
     - skip_ansible_lint # running a sub job
+  changed_when: False
 
 - name: Verify that VMs are properly networked
   shell: export OS_CLOUD=openstack_helm; openstack server list --all-projects|grep '{{ item.vm }}.*ACTIVE.*{{ item.network }}' > /dev/null
@@ -66,3 +69,4 @@
   with_items: "{{ test_ports }}"
   tags:
     - skip_ansible_lint # running a sub job
+  changed_when: False
