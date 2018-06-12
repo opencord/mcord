@@ -15,10 +15,17 @@
 
 
 name: mcord
-accessor:
-  username: xosadmin@opencord.org
-  password: "@/opt/xos/services/mcord/credentials/xosadmin@opencord.org"
 dependency_graph: "/opt/xos/synchronizers/mcord/model-deps"
 sys_dir: "/opt/xos/synchronizers/mcord/sys"
 models_dir: "/opt/xos/synchronizers/mcord/models"
+logging:
+  version: 1
+  handlers:
+    console:
+      class: logging.StreamHandler
+  loggers:
+    'multistructlog':
+      handlers:
+          - console
+      level: DEBUG
 
