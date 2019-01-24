@@ -14,6 +14,6 @@ message MCordSubscriberInstance (ServiceInstance) {
 
     required string imsi_number = 1 [max_length = 30, content_type = "stripped", blank = False, null = False, db_index = False];
     optional string apn_number = 2 [max_length = 30, content_type = "stripped", blank = True, null = True, db_index = False];
-    optional int32 ue_status = 3 [default = 0, choices = "((0, 'Detached'), (1, 'Attached'))", blank = True, null = True, db_index = False];
+    optional string ue_status = 3 [default = "0", choices = "(('0', 'Detached'), ('1', 'Attached'))", blank = True, null = True, db_index = False];
     optional string created_by = 4 [null = True, blank = True, gui_hidden = True];
 }
